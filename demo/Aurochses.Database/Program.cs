@@ -1,5 +1,4 @@
-﻿using System;
-using Aurochses.Database.EntityFrameworkCore;
+﻿using Aurochses.Database.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Aurochses.Database
@@ -8,7 +7,7 @@ namespace Aurochses.Database
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Main<Startup, Service>(args);
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
