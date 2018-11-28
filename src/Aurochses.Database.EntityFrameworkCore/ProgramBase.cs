@@ -8,17 +8,26 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Aurochses.Database.EntityFrameworkCore
 {
+    /// <summary>
+    /// Base class for Program.
+    /// </summary>
     public abstract class ProgramBase
     {
-        public static void Main<TType, TService>(string[] args)
-            where TType : StartupBase
+        /// <summary>
+        /// Main method.
+        /// </summary>
+        /// <typeparam name="TStartup">Type of Startup type.</typeparam>
+        /// <typeparam name="TService">Type of Service type.</typeparam>
+        /// <param name="args">Arguments.</param>
+        public static void Main<TStartup, TService>(string[] args)
+            where TStartup : StartupBase
             where TService : ServiceBase
         {
             // get environment name
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             // startup
-            var startup = (TType) Activator.CreateInstance(typeof(TType), BuildConfiguration(environmentName));
+            var startup = (TStartup) Activator.CreateInstance(typeof(TStartup), BuildConfiguration(environmentName));
 
             // service collection
             var serviceCollection = new ServiceCollection();
@@ -52,6 +61,12 @@ namespace Aurochses.Database.EntityFrameworkCore
             }
         }
 
+        /// <summary>
+        /// Method for create web host builder.
+        /// </summary>
+        /// <typeparam name="TStartup">Type of Startup type.</typeparam>
+        /// <param name="args">Arguments.</param>
+        /// <returns>IWebHostBuilder.</returns>
         public static IWebHostBuilder CreateWebHostBuilder<TStartup>(string[] args)
             where TStartup : class
         {
@@ -59,6 +74,11 @@ namespace Aurochses.Database.EntityFrameworkCore
                 .UseStartup<TStartup>();
         }
 
+        /// <summary>
+        /// Build configuration method.
+        /// </summary>
+        /// <param name="environmentName">Environment name.</param>
+        /// <returns>IConfigurationRoot.</returns>
         public static IConfigurationRoot BuildConfiguration(string environmentName) =>
             new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
