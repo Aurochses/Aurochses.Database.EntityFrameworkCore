@@ -10,6 +10,7 @@ namespace Aurochses.Database
             Main<Startup, Service>(args);
         }
 
+        // ReSharper disable once UnusedMember.Global
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             CreateWebHostBuilder<Startup>(args);
     }

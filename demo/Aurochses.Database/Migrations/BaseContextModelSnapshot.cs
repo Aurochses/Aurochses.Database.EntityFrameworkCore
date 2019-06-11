@@ -3,11 +3,12 @@ using Aurochses.Database.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aurochses.Database.Migrations
 {
     [DbContext(typeof(BaseContext))]
+    // ReSharper disable once PartialTypeWithSinglePart
+    // ReSharper disable once UnusedMember.Global
     partial class BaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
